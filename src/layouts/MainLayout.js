@@ -6,7 +6,7 @@ const MainLayout = () => {
     return (
         <>
             <Header></Header>
-            <main>
+            <main className="flex-1">
                 <Outlet></Outlet>
             </main>
         </>
