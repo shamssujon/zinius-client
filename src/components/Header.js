@@ -26,22 +26,34 @@ const Header = () => {
                         }`}>
                         <NavLink
                             to={"/home"}
-                            className={`p-2 font-semibold uppercase transition hover:text-cyan-500`}>
+                            className={({ isActive }) =>
+                                (isActive ? "text-cyan-400 hover:text-cyan-500" : null) +
+                                " p-2 font-bold uppercase transition hover:text-cyan-500"
+                            }>
                             Home
                         </NavLink>
                         <NavLink
-                            to={"/home"}
-                            className={`p-2 font-semibold uppercase transition hover:text-cyan-500`}>
+                            to={"/courses"}
+                            className={({ isActive }) =>
+                                (isActive ? "text-cyan-400 hover:text-cyan-500" : null) +
+                                " p-2 font-bold uppercase transition hover:text-cyan-500"
+                            }>
                             Courses
                         </NavLink>
                         <NavLink
-                            to={"/home"}
-                            className={`p-2 font-semibold uppercase transition hover:text-cyan-500`}>
+                            to={"/blog"}
+                            className={({ isActive }) =>
+                                (isActive ? "text-cyan-400 hover:text-cyan-500" : null) +
+                                " p-2 font-bold uppercase transition hover:text-cyan-500"
+                            }>
                             Blog
                         </NavLink>
                         <NavLink
-                            to={"/home"}
-                            className={`p-2 font-semibold uppercase transition hover:text-cyan-500`}>
+                            to={"/faq"}
+                            className={({ isActive }) =>
+                                (isActive ? "text-cyan-400 hover:text-cyan-500" : null) +
+                                " p-2 font-bold uppercase transition hover:text-cyan-500"
+                            }>
                             FAQ
                         </NavLink>
                     </nav>
