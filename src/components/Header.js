@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
 import { BsFillPersonFill, BsMoon, BsSun } from "react-icons/bs";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
 
 const Header = () => {
     const [menuActive, setMenuActive] = useState(false);
     const [profileBtnActive, setProfileBtnActive] = useState(false);
     const [darkLight, setDarkLight] = useState(false);
+    const { user } = useContext(AuthContext);
     return (
         <header className="header relative border-b bg-white py-5">
             <div className="container">
@@ -71,6 +74,7 @@ const Header = () => {
                         </button>
 
                         <div className="relative">
+                            <span>{user?.displayName}</span>
                             <button
                                 className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
                                 onClick={() => setProfileBtnActive(!profileBtnActive)}>
