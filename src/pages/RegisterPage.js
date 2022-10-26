@@ -5,7 +5,7 @@ import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 const RegisterPage = () => {
-    const { googleSignIn } = useContext(AuthContext);
+    const { googleSignIn, createUser, setUser } = useContext(AuthContext);
 
     // Google Sign In - start
     const googleProvider = new GoogleAuthProvider();
@@ -14,6 +14,7 @@ const RegisterPage = () => {
         googleSignIn(googleProvider)
             .then((result) => {
                 const user = result.user;
+                setUser(user);
                 console.log(user);
             })
             .catch((error) => {
@@ -22,8 +23,25 @@ const RegisterPage = () => {
     };
     // Google Sign In - end
 
+    // Password Authentication
     const handleRegister = (e) => {
-        console.log("Submitted");
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const photoUrl = form.photoURL.value;
+
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                console.log(user);
+                form.reset();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
     return (
         <section className="py-10">

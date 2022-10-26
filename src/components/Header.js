@@ -74,7 +74,7 @@ const Header = () => {
                         </button>
 
                         <div className="relative">
-                            <span>{user?.displayName}</span>
+                            <span>{user?.email}</span>
                             <button
                                 className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
                                 onClick={() => setProfileBtnActive(!profileBtnActive)}>
