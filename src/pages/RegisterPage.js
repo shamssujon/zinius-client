@@ -1,7 +1,27 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
+import { useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
 const RegisterPage = () => {
+    const { googleSignIn } = useContext(AuthContext);
+
+    // Google Sign In - start
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        googleSignIn(googleProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+    // Google Sign In - end
+
     const handleRegister = (e) => {
         console.log("Submitted");
     };
@@ -79,7 +99,9 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="grid gap-2 md:grid-cols-3">
-                            <button className="inline-flex items-center justify-center gap-2 rounded-md bg-red-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-red-600 md:px-8">
+                            <button
+                                onClick={handleGoogleSignIn}
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-red-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-red-600 md:px-8">
                                 <BsGoogle className="h-6 w-6" />
                                 <span>Google</span>
                             </button>
@@ -97,9 +119,7 @@ const RegisterPage = () => {
                             <div className="absolute top-1/2 h-[1px] w-full bg-gray-300"></div>
                             <span className="relative inline-block bg-slate-50 p-2">
                                 Already have an account?{" "}
-                                <Link
-                                    to={"/login"}
-                                    className="text-cyan-500 hover:underline">
+                                <Link to={"/login"} className="text-cyan-500 hover:underline">
                                     Log in
                                 </Link>
                             </span>

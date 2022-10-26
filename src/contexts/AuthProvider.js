@@ -9,7 +9,12 @@ const auth = getAuth(firebaseApp);
 const AuthProvider = ({ children }) => {
     const user = { displayName: "Sujon" };
 
-    const value = { user };
+    // Google sign in
+    const googleSignIn = (provider) => {
+        return signInWithPopup(auth, provider)
+    }
+
+    const value = { user, googleSignIn };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
