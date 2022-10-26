@@ -86,7 +86,7 @@ const Header = () => {
 
                         <div className="relative">
                             <button
-                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
+                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 hover:outline transition hover:outline-cyan-500/20 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
                                 onClick={() => setProfileBtnActive(!profileBtnActive)}>
                                 {user?.photoURL ? (
                                     <img
@@ -102,7 +102,7 @@ const Header = () => {
                                 className={`absolute right-0 top-full z-10 mt-4 w-56 rounded border bg-white p-4 shadow ${
                                     profileBtnActive ? "visible opacity-100" : "invisible opacity-0"
                                 }`}>
-                                {user ? (
+                                {user?.uid ? (
                                     <div>
                                         <p>Hello, {user?.displayName}</p>
                                         <button

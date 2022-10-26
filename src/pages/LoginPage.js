@@ -1,10 +1,30 @@
 import React from "react";
+import { useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
 
 const LoginPage = () => {
+    const { logIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const handleLogin = (e) => {
-        console.log("Submitted");
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        logIn(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                navigate("/");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
     return (
         <section className="py-10">
@@ -15,7 +35,6 @@ const LoginPage = () => {
                         <form
                             onSubmit={handleLogin}
                             className="grid gap-6 rounded border bg-white p-8">
-
                             <div className="grid gap-2">
                                 <label htmlFor="email" className="text-sm font-bold uppercase">
                                     Email Address <span className="text-rose-500">*</span>
