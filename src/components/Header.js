@@ -89,16 +89,18 @@ const Header = () => {
                                     Sign up or log in to your Zinius account.
                                 </h4>
                                 <div className="grid gap-2">
-                                    <button
+                                    <Link
+                                        onClick={() => setProfileBtnActive(!profileBtnActive)}
                                         to={"/login"}
                                         className="flex items-center justify-center rounded bg-indigo-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-indigo-600">
                                         Login
-                                    </button>
-                                    <button
-                                        to={"/Register"}
+                                    </Link>
+                                    <Link
+                                        onClick={() => setProfileBtnActive(!profileBtnActive)}
+                                        to={"/register"}
                                         className="flex items-center justify-center rounded bg-cyan-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-cyan-600">
                                         Register
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

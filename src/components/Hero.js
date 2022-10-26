@@ -19,7 +19,7 @@ const Hero = () => {
                             professional mentors around the world. If you have a mobile or PC and
                             access to the internet, you can learn anything from anywhere.
                         </p>
-                        <Link className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8 ">
+                        <Link className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8">
                             Start Learning for free
                         </Link>
                     </div>
