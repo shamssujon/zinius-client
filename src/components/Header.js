@@ -9,7 +9,18 @@ const Header = () => {
     const [menuActive, setMenuActive] = useState(false);
     const [profileBtnActive, setProfileBtnActive] = useState(false);
     const [darkLight, setDarkLight] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        setProfileBtnActive(!profileBtnActive);
+        logOut()
+            .then(() => {
+                console.log("Log out");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
     return (
         <header className="header relative border-b bg-white py-5">
             <div className="container">
@@ -74,38 +85,57 @@ const Header = () => {
                         </button>
 
                         <div className="relative">
-                            <span>{user?.email}</span>
                             <button
                                 className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
                                 onClick={() => setProfileBtnActive(!profileBtnActive)}>
-                                <BsFillPersonFill className="h-full w-full p-2" />
-                                {/* <img
-                                    src="https://images.generated.photos/-c0RMaaODAWxUsw2Riomhg3A8EUMXgpzybFGvKQ4g5Y/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/Nzk5Njg1LmpwZw.jpg"
-                                    alt=""
-                                    className="h-full w-full object-cover"
-                                /> */}
+                                {user?.photoURL ? (
+                                    <img
+                                        src={user?.photoURL}
+                                        alt=""
+                                        className="h-full w-full object-cover"
+                                    />
+                                ) : (
+                                    <BsFillPersonFill className="h-full w-full p-2" />
+                                )}
                             </button>
                             <div
                                 className={`absolute right-0 top-full z-10 mt-4 w-56 rounded border bg-white p-4 shadow ${
                                     profileBtnActive ? "visible opacity-100" : "invisible opacity-0"
                                 }`}>
-                                <h4 className="mb-4 text-xl font-bold">
-                                    Sign up or log in to your Zinius account.
-                                </h4>
-                                <div className="grid gap-2">
-                                    <Link
-                                        onClick={() => setProfileBtnActive(!profileBtnActive)}
-                                        to={"/login"}
-                                        className="flex items-center justify-center rounded bg-indigo-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-indigo-600">
-                                        Login
-                                    </Link>
-                                    <Link
-                                        onClick={() => setProfileBtnActive(!profileBtnActive)}
-                                        to={"/register"}
-                                        className="flex items-center justify-center rounded bg-cyan-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-cyan-600">
-                                        Register
-                                    </Link>
-                                </div>
+                                {user ? (
+                                    <div>
+                                        <p>Hello, {user?.displayName}</p>
+                                        <button
+                                            onClick={handleLogOut}
+                                            className="flex items-center justify-center rounded bg-cyan-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-cyan-600">
+                                            Log Out
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <h4 className="mb-4 text-xl font-bold">
+                                            Sign up or log in to your Zinius account.
+                                        </h4>
+                                        <div className="grid gap-2">
+                                            <Link
+                                                onClick={() =>
+                                                    setProfileBtnActive(!profileBtnActive)
+                                                }
+                                                to={"/login"}
+                                                className="flex items-center justify-center rounded bg-indigo-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-indigo-600">
+                                                Login
+                                            </Link>
+                                            <Link
+                                                onClick={() =>
+                                                    setProfileBtnActive(!profileBtnActive)
+                                                }
+                                                to={"/register"}
+                                                className="flex items-center justify-center rounded bg-cyan-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-cyan-600">
+                                                Register
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
