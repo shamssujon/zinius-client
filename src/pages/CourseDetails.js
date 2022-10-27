@@ -31,8 +31,8 @@ const CourseDetails = () => {
                             <div>
                                 <h5 className="mb-2 text-xl font-bold">What you'll learn:</h5>
                                 <ul className="grid gap-2 md:grid-cols-2">
-                                    {features.map((feature) => (
-                                        <li className="flex gap-2">
+                                    {features.map((feature, index) => (
+                                        <li key={index} className="flex gap-2">
                                             <BsCheckCircleFill className="mt-1 text-green-500 shrink-0" />
                                             {feature}
                                         </li>
@@ -73,7 +73,7 @@ const CourseDetails = () => {
                                 <span className="font-bold">Price:</span> ${price} USD
                             </div>
                             <div className="mt-4 grid">
-                                <Link className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8">
+                                <Link to={"/checkout"} className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8">
                                     Get Premium Access
                                 </Link>
                             </div>

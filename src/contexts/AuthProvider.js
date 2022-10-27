@@ -17,37 +17,44 @@ const auth = getAuth(firebaseApp);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // Google sign in
     const providerLogin = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     };
 
     // Create user with email/password
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
     // Login with email/password
     const logIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    // Update User name and photo 
+    // Update User name and photo
     const updateUserProfile = (profile) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, profile);
     };
 
     // Log out
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     };
 
-    // Onserver
+    // Observer
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("Auth state changed", currentUser);
             setUser(currentUser);
+            setLoading(false);
         });
 
         return () => {
@@ -82,7 +89,8 @@ const AuthProvider = ({ children }) => {
         logOut,
         successToast,
         errorToast,
-        updateUserProfile
+        updateUserProfile,
+        loading,
     };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

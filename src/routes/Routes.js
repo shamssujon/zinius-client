@@ -7,6 +7,8 @@ import RegisterPage from "../pages/RegisterPage";
 import CourseCategory from "../pages/CourseCategory";
 import CourseDetails from "../pages/CourseDetails";
 import ErrorPage from "../pages/ErrorPage";
+import CheckoutPage from "../pages/CheckoutPage";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
                 loader: async () => {
                     return fetch("https://zinius-server.vercel.app/courses");
                 },
+            },
+            {
+                path: "/checkout",
+                element: (
+                    <PrivateRoute>
+                        <CheckoutPage></CheckoutPage>
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/login",

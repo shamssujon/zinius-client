@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
@@ -8,6 +8,9 @@ const LoginPage = () => {
     const { logIn, providerLogin, successToast, errorToast } = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState(null);
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     // Google Sign In - start
     const googleProvider = new GoogleAuthProvider();
@@ -18,7 +21,7 @@ const LoginPage = () => {
                 const user = result.user;
                 successToast("Logged in sccessfully!");
                 setError(null);
-                navigate("/");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 errorToast(error.message);
@@ -36,7 +39,7 @@ const LoginPage = () => {
                 const user = result.user;
                 successToast("Logged in sccessfully!");
                 setError(null);
-                navigate("/");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 errorToast(error.message);
@@ -54,7 +57,7 @@ const LoginPage = () => {
                 const user = result.user;
                 successToast("Logged in sccessfully!");
                 setError(null);
-                navigate("/");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 errorToast(error.message);
@@ -75,7 +78,7 @@ const LoginPage = () => {
                 const user = result.user;
                 form.reset();
                 successToast("Logged in sccessfully!");
-                navigate("/");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error(error);
