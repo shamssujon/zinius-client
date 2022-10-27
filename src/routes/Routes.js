@@ -30,6 +30,10 @@ export const router = createBrowserRouter([
                 path: "/register",
                 element: <RegisterPage></RegisterPage>,
             },
+            {
+                path: "/courses/category/:id",
+                element: <CoursesPage></CoursesPage>,
+            },
         ],
     },
 ]);

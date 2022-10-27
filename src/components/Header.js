@@ -9,16 +9,16 @@ const Header = () => {
     const [menuActive, setMenuActive] = useState(false);
     const [profileBtnActive, setProfileBtnActive] = useState(false);
     const [darkLight, setDarkLight] = useState(false);
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, successToast, errorToast } = useContext(AuthContext);
 
     const handleLogOut = () => {
         setProfileBtnActive(!profileBtnActive);
         logOut()
             .then(() => {
-                console.log("Log out");
+                successToast("Signed out");
             })
             .catch((error) => {
-                console.error(error);
+                errorToast(error.message);
             });
     };
     return (
@@ -86,12 +86,12 @@ const Header = () => {
 
                         <div className="relative">
                             <button
-                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 hover:outline transition hover:outline-cyan-500/20 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50"
-                                onClick={() => setProfileBtnActive(!profileBtnActive)}>
+                                onClick={() => setProfileBtnActive(!profileBtnActive)}
+                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 hover:outline hover:outline-cyan-500/20 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50">
                                 {user?.photoURL ? (
                                     <img
                                         src={user?.photoURL}
-                                        alt=""
+                                        alt={user?.displayName}
                                         className="h-full w-full object-cover"
                                     />
                                 ) : (
@@ -104,7 +104,7 @@ const Header = () => {
                                 }`}>
                                 {user?.uid ? (
                                     <div>
-                                        <p>Hello, {user?.displayName}</p>
+                                        {user?.displayName && <p>Hello, {user?.displayName}</p>}
                                         <button
                                             onClick={handleLogOut}
                                             className="flex items-center justify-center rounded bg-cyan-500 px-4 py-2 text-center font-semibold uppercase text-white transition hover:bg-cyan-600">

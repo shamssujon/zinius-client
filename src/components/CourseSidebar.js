@@ -12,9 +12,11 @@ const CourseSidebar = () => {
     }, []);
     return (
         <div className="">
-            <h5 className="text-xl font-bold mb-4">Popular Categories</h5>
+            <h5 className="mb-4 text-xl font-bold">Popular Categories</h5>
             <nav className="grid">
-                {categories.map(category => <Link key={category.id}>{category.name}</Link>)}
+                {categories.map((category) => (
+                    <Link key={category.id}>{category.name}</Link>
+                ))}
             </nav>
         </div>
     );

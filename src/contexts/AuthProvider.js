@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
     createUserWithEmailAndPassword,
     getAuth,
@@ -9,8 +9,7 @@ import {
     signOut,
 } from "firebase/auth";
 import firebaseApp from "../firebase/firebase.config";
-import { useState } from "react";
-import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 const auth = getAuth(firebaseApp);
@@ -50,7 +49,25 @@ const AuthProvider = ({ children }) => {
         };
     }, []);
 
-    const value = { user, setUser, createUser, providerLogin, logIn, logOut };
+    // Success toast
+    const successToast = (message) => {
+        toast.success(message, {
+            duration: 4000,
+            position: "top-center",
+            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+        });
+    };
+
+    // Error toast
+    const errorToast = (message) => {
+        toast.error(message, {
+            duration: 4000,
+            position: "bottom-right",
+            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+        });
+    };
+
+    const value = { user, setUser, createUser, providerLogin, logIn, logOut, successToast, errorToast };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

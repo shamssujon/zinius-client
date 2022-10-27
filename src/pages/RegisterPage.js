@@ -1,11 +1,13 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import React from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
+
 const RegisterPage = () => {
-    const { providerLogin, createUser } = useContext(AuthContext);
+    const { providerLogin, createUser, successToast, errorToast } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
     // Google Sign In - start
     const googleProvider = new GoogleAuthProvider();
@@ -14,10 +16,13 @@ const RegisterPage = () => {
         providerLogin(googleProvider)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
+                successToast("Logged in sccessfully!");
+                setError(null);
+                navigate("/");
             })
             .catch((error) => {
-                console.error(error);
+                errorToast(error.message);
+                setError(error.message);
             });
     };
     // Google Sign In - end
@@ -31,20 +36,44 @@ const RegisterPage = () => {
         const password = form.password.value;
         const photoUrl = form.photoURL.value;
 
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/;
+
+        if (password.length <= 0) {
+            setError("Password is required");
+            errorToast("Password is required");
+            return;
+        } else if (!passwordRegex.test(password)) {
+            setError(
+                "Password should contain a small and capital letter, a digit, a special charecter"
+            );
+            errorToast(
+                "Password should contain a small and capital letter, a digit, a special charecter"
+            );
+            return;
+        } else {
+            setError(null);
+        }
+
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
                 form.reset();
+                setError(null);
+                successToast("Account created sccessfully!");
+                navigate("/");
             })
             .catch((error) => {
-                console.error(error);
+                errorToast(error.message);
+                setError(error.message);
             });
     };
     return (
         <section className="py-10">
             <div className="container">
-                <h2 className="mb-8 text-center text-4xl font-bold">Create an account</h2>
+                <div className="mb-8 text-center">
+                    <h2 className="text-4xl font-bold">Create an account</h2>
+                    <p className="mt-2 text-rose-600">{error}</p>
+                </div>
                 <div className="mx-auto grid max-w-xl gap-8">
                     <div className="">
                         <form

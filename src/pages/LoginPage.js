@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const LoginPage = () => {
-    const { logIn } = useContext(AuthContext);
+    const { logIn, providerLogin, successToast, errorToast } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
+
+    // Google Sign In - start
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then((result) => {
+                const user = result.user;
+                successToast("Logged in sccessfully!");
+                setError(null);
+                navigate("/");
+            })
+            .catch((error) => {
+                errorToast(error.message);
+                setError(error.message);
+            });
+    };
+    // Google Sign In - end
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -29,7 +49,10 @@ const LoginPage = () => {
     return (
         <section className="py-10">
             <div className="container">
-                <h2 className="mb-8 text-center text-4xl font-bold">Log in</h2>
+                <div className="mb-8 text-center">
+                    <h2 className="text-4xl font-bold">Log in</h2>
+                    <p className="mt-2 text-rose-600">{error}</p>
+                </div>
                 <div className="mx-auto grid max-w-xl gap-8">
                     <div className="">
                         <form
@@ -76,7 +99,9 @@ const LoginPage = () => {
                         </div>
 
                         <div className="grid gap-2 md:grid-cols-3">
-                            <button className="inline-flex items-center justify-center gap-2 rounded-md bg-red-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-red-600 md:px-8">
+                            <button
+                                onClick={handleGoogleSignIn}
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-red-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-red-600 md:px-8">
                                 <BsGoogle className="h-6 w-6" />
                                 <span>Google</span>
                             </button>
