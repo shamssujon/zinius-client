@@ -5,7 +5,8 @@ import { AuthContext } from "../contexts/AuthProvider";
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const RegisterPage = () => {
-    const { providerLogin, createUser, successToast, errorToast } = useContext(AuthContext);
+    const { providerLogin, createUser, successToast, errorToast, updateUserProfile } =
+        useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -63,6 +64,15 @@ const RegisterPage = () => {
     };
     // Facebook Sign In - end
 
+    const handleUpdateUserProfile = (name, photoUrl) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoUrl,
+        };
+        updateUserProfile(profile)
+            .then(() => {})
+            .catch((e) => console.error(e));
+    };
 
     // Password Authentication
     const handleRegister = (e) => {
@@ -98,6 +108,7 @@ const RegisterPage = () => {
                 setError(null);
                 successToast("Account created sccessfully!");
                 navigate("/");
+                handleUpdateUserProfile(name, photoUrl);
             })
             .catch((error) => {
                 errorToast(error.message);
@@ -193,7 +204,9 @@ const RegisterPage = () => {
                                 <BsGithub className="h-6 w-6" />
                                 <span>Github</span>
                             </button>
-                            <button onClick={handleFacebookSignIn} className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-blue-600 md:px-8">
+                            <button
+                                onClick={handleFacebookSignIn}
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-blue-600 md:px-8">
                                 <BsFacebook className="h-6 w-6" />
                                 <span>Facebook</span>
                             </button>

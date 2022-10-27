@@ -73,12 +73,13 @@ const LoginPage = () => {
         logIn(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
                 form.reset();
+                successToast("Logged in sccessfully!");
                 navigate("/");
             })
             .catch((error) => {
                 console.error(error);
+                errorToast(error.message);
             });
     };
     return (
