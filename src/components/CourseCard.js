@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-    const { id, title, price, image, description } = course;
+    const { id, title, price, image, intro } = course;
     return (
         <div className="overflow-hidden rounded-md border bg-white shadow">
             <img src={image} alt="" />
             <div className="p-4">
                 <h5 className="mb-2 text-xl font-bold">{title}</h5>
                 <p className="mb-2">
-                    {description.length > 100 ? description.slice(0, 100) + "..." : description}
+                    {intro.length > 100 ? intro.slice(0, 100) + "..." : intro}
                 </p>
                 <p className="text-lg font-bold">${price} USD</p>
             </div>

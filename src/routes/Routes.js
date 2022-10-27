@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
                 path: "/courses",
                 element: <CoursesPage></CoursesPage>,
                 loader: async () => {
-                    return fetch("http://localhost:5000/courses");
+                    return fetch("https://zinius-server.vercel.app/courses");
                 },
             },
             {
@@ -39,14 +39,14 @@ export const router = createBrowserRouter([
                 path: "/courses/:id",
                 element: <CourseCategory></CourseCategory>,
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/category/${params.id}`);
+                    return fetch(`https://zinius-server.vercel.app/category/${params.id}`);
                 },
             },
             {
                 path: "/courses/course/:id",
                 element: <CourseDetails></CourseDetails>,
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/course/${params.id}`);
+                    return fetch(`https://zinius-server.vercel.app/course/${params.id}`);
                 },
             },
         ],

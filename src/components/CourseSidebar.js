@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const CourseSidebar = () => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/categories")
+        fetch("https://zinius-server.vercel.app/categories")
             .then((res) => res.json())
             .then((data) => setCategories(data));
     }, []);
@@ -20,7 +20,7 @@ const CourseSidebar = () => {
                         to={`/courses/${category.id}`}
                         className={({ isActive }) =>
                             (isActive ? "bg-indigo-600 text-white hover:text-white" : null) +
-                            " rounded p-2 font-bold uppercase transition hover:bg-indigo-500 hover:text-white"
+                            " rounded p-2 font-bold transition hover:bg-indigo-500 hover:text-white"
                         }>
                         {category.name}
                     </NavLink>
