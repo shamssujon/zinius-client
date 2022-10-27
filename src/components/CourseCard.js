@@ -15,7 +15,7 @@ const CourseCard = ({ course }) => {
             </div>
             <div className="grid">
                 <Link
-                    to={`/courses/${id}`}
+                    to={`/courses/course/${id}`}
                     className="flex items-center justify-center bg-cyan-500 px-4 py-3 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8">
                     See details
                 </Link>

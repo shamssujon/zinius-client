@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const CourseSidebar = () => {
     const [categories, setCategories] = useState([]);
@@ -15,12 +15,15 @@ const CourseSidebar = () => {
             <h5 className="mb-4 text-xl font-bold">Popular Categories</h5>
             <nav className="grid">
                 {categories.map((category) => (
-                    <Link
+                    <NavLink
                         key={category.id}
                         to={`/courses/${category.id}`}
-                        className="rounded p-2 transition hover:bg-indigo-500 hover:text-white">
+                        className={({ isActive }) =>
+                            (isActive ? "bg-indigo-600 text-white hover:text-white" : null) +
+                            " rounded p-2 font-bold uppercase transition hover:bg-indigo-500 hover:text-white"
+                        }>
                         {category.name}
-                    </Link>
+                    </NavLink>
                 ))}
             </nav>
         </div>

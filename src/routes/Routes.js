@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage";
 import CoursesPage from "../pages/CoursesPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import CourseCategory from "../pages/CourseCategory";
+import CourseDetails from "../pages/CourseDetails";
 
 export const router = createBrowserRouter([
     {
@@ -34,8 +36,18 @@ export const router = createBrowserRouter([
                 element: <RegisterPage></RegisterPage>,
             },
             {
-                path: "/courses/category/:id",
-                element: <CoursesPage></CoursesPage>,
+                path: "/courses/:id",
+                element: <CourseCategory></CourseCategory>,
+                loader: async ({ params }) => {
+                    return fetch(`http://localhost:5000/category/${params.id}`);
+                },
+            },
+            {
+                path: "/courses/course/:id",
+                element: <CourseDetails></CourseDetails>,
+                loader: async ({ params }) => {
+                    return fetch(`http://localhost:5000/course/${params.id}`);
+                },
             },
         ],
     },
