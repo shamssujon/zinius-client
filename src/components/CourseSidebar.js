@@ -11,11 +11,16 @@ const CourseSidebar = () => {
             .then((data) => setCategories(data));
     }, []);
     return (
-        <div className="">
+        <div className="sticky top-10">
             <h5 className="mb-4 text-xl font-bold">Popular Categories</h5>
             <nav className="grid">
                 {categories.map((category) => (
-                    <Link key={category.id}>{category.name}</Link>
+                    <Link
+                        key={category.id}
+                        to={`/courses/${category.id}`}
+                        className="rounded p-2 transition hover:bg-indigo-500 hover:text-white">
+                        {category.name}
+                    </Link>
                 ))}
             </nav>
         </div>
