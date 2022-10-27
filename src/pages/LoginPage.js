@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
-import { GoogleAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const LoginPage = () => {
     const { logIn, providerLogin, successToast, errorToast } = useContext(AuthContext);
@@ -27,6 +26,42 @@ const LoginPage = () => {
             });
     };
     // Google Sign In - end
+
+    // Github Sign In - start
+    const githubProvider = new GithubAuthProvider();
+
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then((result) => {
+                const user = result.user;
+                successToast("Logged in sccessfully!");
+                setError(null);
+                navigate("/");
+            })
+            .catch((error) => {
+                errorToast(error.message);
+                setError(error.message);
+            });
+    };
+    // Github Sign In - end
+
+    // Facebook Sign In - start
+    const facebookProvider = new FacebookAuthProvider();
+
+    const handleFacebookSignIn = () => {
+        providerLogin(facebookProvider)
+            .then((result) => {
+                const user = result.user;
+                successToast("Logged in sccessfully!");
+                setError(null);
+                navigate("/");
+            })
+            .catch((error) => {
+                errorToast(error.message);
+                setError(error.message);
+            });
+    };
+    // Facebook Sign In - end
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -105,11 +140,15 @@ const LoginPage = () => {
                                 <BsGoogle className="h-6 w-6" />
                                 <span>Google</span>
                             </button>
-                            <button className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-800 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-slate-900 md:px-8">
+                            <button
+                                onClick={handleGithubSignIn}
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-800 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-slate-900 md:px-8">
                                 <BsGithub className="h-6 w-6" />
                                 <span>Github</span>
                             </button>
-                            <button className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-blue-600 md:px-8">
+                            <button
+                                onClick={handleFacebookSignIn}
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-500 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-blue-600 md:px-8">
                                 <BsFacebook className="h-6 w-6" />
                                 <span>Facebook</span>
                             </button>
