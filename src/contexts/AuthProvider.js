@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
     // Observer
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log("Auth state changed", currentUser);
+            // console.log("Auth state changed", currentUser);
             setUser(currentUser);
             setLoading(false);
         });
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     const successToast = (message) => {
         toast.success(message, {
             duration: 4000,
-            position: "top-center",
+            position: "bottom-right",
             className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
         });
     };

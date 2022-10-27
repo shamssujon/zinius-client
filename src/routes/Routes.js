@@ -35,12 +35,15 @@ export const router = createBrowserRouter([
                 },
             },
             {
-                path: "/checkout",
+                path: "/courses/course/:id/checkout",
                 element: (
                     <PrivateRoute>
                         <CheckoutPage></CheckoutPage>
                     </PrivateRoute>
                 ),
+                loader: async ({ params }) => {
+                    return fetch(`https://zinius-server.vercel.app/course/${params.id}`);
+                },
             },
             {
                 path: "/login",
