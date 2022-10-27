@@ -6,12 +6,17 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import CourseCategory from "../pages/CourseCategory";
 import CourseDetails from "../pages/CourseDetails";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
         children: [
+            {
+                path: "*",
+                element: <ErrorPage></ErrorPage>,
+            },
             {
                 path: "/",
                 element: <HomePage></HomePage>,

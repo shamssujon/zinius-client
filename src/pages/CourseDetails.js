@@ -1,7 +1,6 @@
 import React from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useLoaderData } from "react-router-dom";
-import CourseSidebar from "../components/CourseSidebar";
 
 const CourseDetails = () => {
     const courseData = useLoaderData();
