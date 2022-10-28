@@ -9,7 +9,7 @@ const ErrorPage = () => {
             <div className="container">
                 <h2 className="mb-3 text-5xl font-extrabold uppercase">Hoops..!</h2>
                 <h4 className="text-2xl font-bold">
-                    looks like you are in a wrong path
+                    The content you have requested is not found here
                 </h4>
                 <Player
                     autoplay
