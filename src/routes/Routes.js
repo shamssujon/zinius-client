@@ -10,6 +10,7 @@ import ErrorPage from "../pages/ErrorPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import PrivateRoute from "./PrivateRoute";
 import BlogPage from "../pages/BlogPage";
+import FaqPage from "../pages/FaqPage";
 
 export const router = createBrowserRouter([
     {
@@ -73,6 +74,13 @@ export const router = createBrowserRouter([
                 element: <BlogPage></BlogPage>,
                 loader: async () => {
                     return fetch(`https://zinius-server.vercel.app/blog`);
+                },
+            },
+            {
+                path: "/faq",
+                element: <FaqPage></FaqPage>,
+                loader: async () => {
+                    return fetch(`https://zinius-server.vercel.app/faqs`);
                 },
             },
         ],
