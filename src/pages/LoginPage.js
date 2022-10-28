@@ -76,11 +76,12 @@ const LoginPage = () => {
             .then((result) => {
                 const user = result.user;
                 form.reset();
+                setError(null);
                 successToast("Logged in sccessfully!");
                 navigate(from, { replace: true });
             })
             .catch((error) => {
-                console.error(error);
+                setError(error.message);
                 errorToast(error.message);
             });
     };

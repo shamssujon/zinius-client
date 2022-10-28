@@ -1,7 +1,13 @@
 import React from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { FaDownload } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
-
+import Pdf from "react-to-pdf";
+const ref = React.createRef();
+const options = {
+    orientation: "landscape",
+    unit: "in",
+};
 const CourseDetails = () => {
     const courseData = useLoaderData();
     const {
@@ -20,9 +26,20 @@ const CourseDetails = () => {
     return (
         <section className="py-10">
             <div className="container">
-                <div className="grid gap-8 lg:grid-cols-6">
-                    <div className="overflow-hidden rounded-md border bg-white lg:col-span-4">
-                        <div className=" space-y-8 p-6 md:p-8">
+                <div className="mb-4">
+                    <Pdf targetRef={ref} filename="download.pdf" options={options} scale={0.7}>
+                        {({ toPdf }) => (
+                            <button
+                                onClick={toPdf}
+                                className="flex items-center justify-center gap-2 rounded bg-cyan-500 px-4 py-2 text-center text-sm font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600">
+                                <FaDownload /> Download this page as PDF
+                            </button>
+                        )}
+                    </Pdf>
+                </div>
+                <div className="grid gap-8 lg:grid-cols-6" ref={ref}>
+                    <div className="overflow-hidden lg:col-span-4">
+                        <div className="space-y-8 rounded-md border  bg-white p-6 md:p-8">
                             <div>
                                 <h3 className="mb-2 text-3xl font-bold">{title}</h3>
                                 <p className="text-lg">{intro}</p>
