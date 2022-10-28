@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
+import { BsGoogle, BsFacebook, BsGithub, BsXLg } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const LoginPage = () => {
-    const { logIn, providerLogin, successToast, errorToast } = useContext(AuthContext);
+    const { logIn, providerLogin, successToast, errorToast, resetPassword } =
+        useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -66,6 +67,7 @@ const LoginPage = () => {
     };
     // Facebook Sign In - end
 
+    // Email/Password login
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -84,6 +86,27 @@ const LoginPage = () => {
                 setError(error.message);
                 errorToast(error.message);
             });
+    };
+
+    // Password reset modal
+    const [openModal, setOpenModal] = useState(false);
+    const handleResetPasswordModal = (e) => {
+        e.preventDefault();
+        setOpenModal(!openModal);
+    };
+
+    // Password reset
+    const handleResetPassword = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.resetEmail.value;
+        resetPassword(email)
+            .then(() => {
+                form.reset();
+                successToast("Password reset email sent!");
+                setOpenModal(!openModal);
+            })
+            .catch((e) => errorToast(e.message));
     };
     return (
         <section className="py-10">
@@ -111,8 +134,17 @@ const LoginPage = () => {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <label htmlFor="password" className="text-sm font-bold uppercase">
-                                    Password <span className="text-rose-500">*</span>
+                                <label
+                                    htmlFor="password"
+                                    className="flex items-center justify-between gap-2 text-sm font-bold uppercase">
+                                    <span>
+                                        Password <span className="text-rose-500">*</span>
+                                    </span>
+                                    <button
+                                        onClick={handleResetPasswordModal}
+                                        className="text-slate-600 hover:text-indigo-600 hover:underline hover:underline-offset-2">
+                                        Forgot password?
+                                    </button>
                                 </label>
                                 <input
                                     required
@@ -170,6 +202,44 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Password reset modal */}
+            {openModal && (
+                <>
+                    <div
+                        onClick={() => setOpenModal(!openModal)}
+                        className="fixed inset-0 z-20 h-full w-full cursor-pointer bg-black/70"></div>
+                    <div className="modal-body fixed top-1/2 left-1/2 z-30 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md border bg-white">
+                        <div className="flex items-center justify-between border-b px-6 py-3">
+                            <h5 className="text-xl font-bold">Reset password</h5>
+                            <button
+                                onClick={() => setOpenModal(!openModal)}
+                                className="flex h-6 w-6 items-center justify-center">
+                                <BsXLg />
+                            </button>
+                        </div>
+                        <div className="p-6">
+                            <p className="mb-4 text-lg">
+                                Forgot your password? Enter email and send a password reset email
+                            </p>
+                            <form className="grid gap-2" onSubmit={handleResetPassword}>
+                                <input
+                                    type="email"
+                                    name="resetEmail"
+                                    id="resetEmail"
+                                    placeholder="Enter Email Address"
+                                    className="w-full rounded border px-4 py-2 text-lg outline-cyan-500 transition"
+                                />
+                                <button
+                                    type="submit"
+                                    className="flex items-center justify-center rounded-md bg-cyan-500 px-4 py-3 text-center font-bold uppercase tracking-wide text-white transition hover:bg-cyan-600 md:px-8">
+                                    Send password reset link
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </>
+            )}
         </section>
     );
 };

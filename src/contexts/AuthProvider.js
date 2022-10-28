@@ -5,6 +5,7 @@ import {
     getAuth,
     onAuthStateChanged,
     sendEmailVerification,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
@@ -44,8 +45,14 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, profile);
     };
 
+    // Email verification
     const emailVerification = () => {
         return sendEmailVerification(auth.currentUser);
+    };
+
+    // Password reset
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
     };
 
     // Log out
@@ -107,6 +114,7 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         loading,
         emailVerification,
+        resetPassword,
     };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
