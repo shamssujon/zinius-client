@@ -9,6 +9,7 @@ import CourseDetails from "../pages/CourseDetails";
 import ErrorPage from "../pages/ErrorPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import PrivateRoute from "./PrivateRoute";
+import BlogPage from "../pages/BlogPage";
 
 export const router = createBrowserRouter([
     {
@@ -28,10 +29,32 @@ export const router = createBrowserRouter([
                 element: <HomePage></HomePage>,
             },
             {
+                path: "/login",
+                element: <LoginPage></LoginPage>,
+            },
+            {
+                path: "/register",
+                element: <RegisterPage></RegisterPage>,
+            },
+            {
                 path: "/courses",
                 element: <CoursesPage></CoursesPage>,
                 loader: async () => {
                     return fetch("https://zinius-server.vercel.app/courses");
+                },
+            },
+            {
+                path: "/courses/:id",
+                element: <CourseCategory></CourseCategory>,
+                loader: async ({ params }) => {
+                    return fetch(`https://zinius-server.vercel.app/category/${params.id}`);
+                },
+            },
+            {
+                path: "/courses/course/:id",
+                element: <CourseDetails></CourseDetails>,
+                loader: async ({ params }) => {
+                    return fetch(`https://zinius-server.vercel.app/course/${params.id}`);
                 },
             },
             {
@@ -46,25 +69,10 @@ export const router = createBrowserRouter([
                 },
             },
             {
-                path: "/login",
-                element: <LoginPage></LoginPage>,
-            },
-            {
-                path: "/register",
-                element: <RegisterPage></RegisterPage>,
-            },
-            {
-                path: "/courses/:id",
-                element: <CourseCategory></CourseCategory>,
-                loader: async ({ params }) => {
-                    return fetch(`https://zinius-server.vercel.app/category/${params.id}`);
-                },
-            },
-            {
-                path: "/courses/course/:id",
-                element: <CourseDetails></CourseDetails>,
-                loader: async ({ params }) => {
-                    return fetch(`https://zinius-server.vercel.app/course/${params.id}`);
+                path: "/blog",
+                element: <BlogPage></BlogPage>,
+                loader: async () => {
+                    return fetch(`https://zinius-server.vercel.app/blog`);
                 },
             },
         ],
