@@ -112,16 +112,18 @@ const LoginPage = () => {
         <section className="py-10">
             <div className="container">
                 <div className="mb-8 text-center">
-                    <h2 className="text-4xl font-bold">Log in</h2>
+                    <h2 className="text-4xl font-bold dark:text-slate-50">Log in</h2>
                     <p className="mt-2 text-rose-600">{error}</p>
                 </div>
                 <div className="mx-auto grid max-w-xl gap-8">
                     <div className="">
                         <form
                             onSubmit={handleLogin}
-                            className="grid gap-6 rounded border bg-white p-8">
+                            className="grid gap-6 rounded border bg-white p-8 dark:border-gray-700 dark:bg-slate-900">
                             <div className="grid gap-2">
-                                <label htmlFor="email" className="text-sm font-bold uppercase">
+                                <label
+                                    htmlFor="email"
+                                    className="text-sm font-bold uppercase dark:text-slate-50">
                                     Email Address <span className="text-rose-500">*</span>
                                 </label>
                                 <input
@@ -130,19 +132,19 @@ const LoginPage = () => {
                                     name="email"
                                     id="email"
                                     placeholder="Enter email address"
-                                    className="w-full rounded border px-4 py-2 outline-cyan-500 transition"
+                                    className="w-full rounded border px-4 py-2 outline-cyan-500 transition dark:border-gray-700"
                                 />
                             </div>
                             <div className="grid gap-2">
                                 <label
                                     htmlFor="password"
-                                    className="flex items-center justify-between gap-2 text-sm font-bold uppercase">
+                                    className="flex items-center justify-between gap-2 text-sm font-bold uppercase dark:text-slate-50">
                                     <span>
                                         Password <span className="text-rose-500">*</span>
                                     </span>
                                     <button
                                         onClick={handleResetPasswordModal}
-                                        className="text-slate-600 hover:text-indigo-600 hover:underline hover:underline-offset-2">
+                                        className="text-slate-600 hover:text-indigo-600 hover:underline hover:underline-offset-2 dark:text-slate-400 dark:hover:text-indigo-300">
                                         Forgot password?
                                     </button>
                                 </label>
@@ -152,7 +154,7 @@ const LoginPage = () => {
                                     name="password"
                                     id="password"
                                     placeholder="Enter Password"
-                                    className="w-full rounded border px-4 py-2 outline-cyan-500 transition"
+                                    className="w-full rounded border px-4 py-2 outline-cyan-500 transition dark:border-gray-700"
                                 />
                             </div>
                             <div className="grid">
@@ -163,8 +165,8 @@ const LoginPage = () => {
                         </form>
 
                         <div className="relative py-4 text-center">
-                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300"></div>
-                            <span className="relative inline-block bg-slate-50 p-2">
+                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300 dark:bg-gray-700"></div>
+                            <span className="relative inline-block bg-slate-50 p-2 dark:bg-slate-800 dark:text-slate-50">
                                 Or continue with:{" "}
                             </span>
                         </div>
@@ -178,7 +180,7 @@ const LoginPage = () => {
                             </button>
                             <button
                                 onClick={handleGithubSignIn}
-                                className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-800 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-slate-900 md:px-8">
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-gray-900 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-gray-800 md:px-8">
                                 <BsGithub className="h-6 w-6" />
                                 <span>Github</span>
                             </button>
@@ -191,8 +193,8 @@ const LoginPage = () => {
                         </div>
 
                         <div className="relative py-4 text-center">
-                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300"></div>
-                            <span className="relative inline-block bg-slate-50 p-2">
+                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300 dark:bg-gray-700"></div>
+                            <span className="relative inline-block bg-slate-50 p-2 dark:bg-slate-800 dark:text-slate-50">
                                 Do not have an account?{" "}
                                 <Link to={"/register"} className="text-cyan-500 hover:underline">
                                     Create an account
@@ -209,7 +211,7 @@ const LoginPage = () => {
                     <div
                         onClick={() => setOpenModal(!openModal)}
                         className="fixed inset-0 z-20 h-full w-full cursor-pointer bg-black/70"></div>
-                    <div className="modal-body fixed top-1/2 left-1/2 z-30 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md border bg-white">
+                    <div className="modal-body fixed top-1/2 left-1/2 z-30 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md border bg-white dark:border-gray-700 ">
                         <div className="flex items-center justify-between border-b px-6 py-3">
                             <h5 className="text-xl font-bold">Reset password</h5>
                             <button
@@ -228,7 +230,7 @@ const LoginPage = () => {
                                     name="resetEmail"
                                     id="resetEmail"
                                     placeholder="Enter Email Address"
-                                    className="w-full rounded border px-4 py-2 text-lg outline-cyan-500 transition"
+                                    className="w-full rounded border px-4 py-2 text-lg outline-cyan-500 transition "
                                 />
                                 <button
                                     type="submit"

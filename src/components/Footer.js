@@ -11,7 +11,7 @@ import {
 } from "react-icons/bs";
 const Footer = () => {
     return (
-        <footer className="border-t bg-white">
+        <footer className="border-t bg-white dark:border-t-gray-700 dark:bg-slate-900 dark:text-slate-50">
             <div className="container">
                 <div className="grid gap-8 py-10 md:grid-cols-2  lg:grid-cols-4">
                     <div className="">
@@ -141,7 +141,7 @@ const Footer = () => {
                         </form>
                     </div>
                 </div>
-                <hr />
+                <hr className="dark:border-t-gray-700" />
                 <div className="py-6 text-center">
                     <p>Copyright &copy; 2022 | Some rights reserved</p>
                 </div>

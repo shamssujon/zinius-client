@@ -9,10 +9,10 @@ const CoursesPage = () => {
         <section className="py-10">
             <div className="container">
                 <div className="grid gap-8 lg:grid-cols-4">
-                    <div className="sidebar rounded border bg-white p-8">
+                    <div className="sidebar rounded border bg-white p-8 dark:border-gray-700 dark:bg-slate-900 dark:text-slate-50">
                         <CourseSidebar></CourseSidebar>
                     </div>
-                    <div className="lg:col-span-3 rounded border bg-white p-6 md:p-8">
+                    <div className="rounded border bg-white p-6 dark:border-gray-700 dark:bg-slate-900 md:p-8 lg:col-span-3">
                         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                             {courses.map((course) => (
                                 <CourseCard key={course.id} course={course}></CourseCard>

@@ -8,9 +8,7 @@ const CourseCard = ({ course }) => {
             <img src={image} alt="" />
             <div className="p-4">
                 <h5 className="mb-2 text-xl font-bold">{title}</h5>
-                <p className="mb-2">
-                    {intro.length > 100 ? intro.slice(0, 100) + "..." : intro}
-                </p>
+                <p className="mb-2">{intro.length > 100 ? intro.slice(0, 100) + "..." : intro}</p>
                 <p className="text-lg font-bold">${price} USD</p>
             </div>
             <div className="grid">

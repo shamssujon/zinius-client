@@ -6,7 +6,7 @@ const Hero = () => {
     return (
         <section className="py-10">
             <div className="container">
-                <div className="grid items-center gap-8 rounded-3xl border bg-white p-6 md:p-10 lg:grid-cols-2 xl:px-14 2xl:px-20">
+                <div className="grid items-center gap-8 rounded-3xl border bg-white dark:bg-slate-900 dark:border-gray-700 dark:text-slate-50 p-6 md:p-10 lg:grid-cols-2 xl:px-14 2xl:px-20">
                     <div className="">
                         <h2 className="mb-8 text-4xl font-bold md:text-5xl md:leading-tight">
                             Learn from{" "}

@@ -20,6 +20,7 @@ const auth = getAuth(firebaseApp);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [darkLight, setDarkLight] = useState(false);
 
     // Google sign in
     const providerLogin = (provider) => {
@@ -80,7 +81,8 @@ const AuthProvider = ({ children }) => {
             icon: "⚠",
             duration: 5000,
             position: "bottom-right",
-            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+            className:
+                "!bg-slate-800 !dark:bg-slate-50 !dark:text-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
         });
     };
     // Success toast
@@ -88,7 +90,8 @@ const AuthProvider = ({ children }) => {
         toast.success(message, {
             duration: 4000,
             position: "bottom-right",
-            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+            className:
+                "!bg-slate-800 !dark:bg-slate-50 !dark:text-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
         });
     };
 
@@ -97,7 +100,8 @@ const AuthProvider = ({ children }) => {
         toast.error(message, {
             duration: 4000,
             position: "bottom-right",
-            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+            className:
+                "!bg-slate-800 !dark:bg-slate-50 !dark:text-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
         });
     };
 
@@ -115,6 +119,8 @@ const AuthProvider = ({ children }) => {
         loading,
         emailVerification,
         resetPassword,
+        darkLight,
+        setDarkLight,
     };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

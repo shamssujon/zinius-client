@@ -133,16 +133,18 @@ const RegisterPage = () => {
         <section className="py-10">
             <div className="container">
                 <div className="mb-8 text-center">
-                    <h2 className="text-4xl font-bold">Create an account</h2>
+                    <h2 className="text-4xl font-bold dark:text-slate-50">Create an account</h2>
                     <p className="mt-2 text-rose-600">{error}</p>
                 </div>
                 <div className="mx-auto grid max-w-xl gap-8">
                     <div className="">
                         <form
                             onSubmit={handleRegister}
-                            className="grid gap-6 rounded border bg-white p-8">
+                            className="grid gap-6 rounded border bg-white p-8 dark:border-gray-700 dark:bg-slate-900">
                             <div className="grid gap-2">
-                                <label htmlFor="name" className="text-sm font-bold uppercase">
+                                <label
+                                    htmlFor="name"
+                                    className="text-sm font-bold uppercase dark:text-slate-50">
                                     Full name
                                 </label>
                                 <input
@@ -154,7 +156,9 @@ const RegisterPage = () => {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <label htmlFor="email" className="text-sm font-bold uppercase">
+                                <label
+                                    htmlFor="email"
+                                    className="text-sm font-bold uppercase dark:text-slate-50">
                                     Email Address <span className="text-rose-500">*</span>
                                 </label>
                                 <input
@@ -167,7 +171,9 @@ const RegisterPage = () => {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <label htmlFor="password" className="text-sm font-bold uppercase">
+                                <label
+                                    htmlFor="password"
+                                    className="text-sm font-bold uppercase dark:text-slate-50">
                                     Choose a Password <span className="text-rose-500">*</span>
                                 </label>
                                 <input
@@ -180,7 +186,9 @@ const RegisterPage = () => {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <label htmlFor="photoURL" className="text-sm font-bold uppercase">
+                                <label
+                                    htmlFor="photoURL"
+                                    className="text-sm font-bold uppercase dark:text-slate-50">
                                     photo URL
                                 </label>
                                 <input
@@ -199,8 +207,8 @@ const RegisterPage = () => {
                         </form>
 
                         <div className="relative py-4 text-center">
-                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300"></div>
-                            <span className="relative inline-block bg-slate-50 p-2">
+                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300 dark:bg-gray-700"></div>
+                            <span className="relative inline-block bg-slate-50 p-2 dark:bg-slate-800 dark:text-slate-50">
                                 Or continue with:{" "}
                             </span>
                         </div>
@@ -214,7 +222,7 @@ const RegisterPage = () => {
                             </button>
                             <button
                                 onClick={handleGithubSignIn}
-                                className="inline-flex items-center justify-center gap-2 rounded-md bg-slate-800 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-slate-900 md:px-8">
+                                className="inline-flex items-center justify-center gap-2 rounded-md bg-gray-900 px-6 py-4 text-center font-bold uppercase tracking-wide text-white transition hover:bg-gray-800 md:px-8">
                                 <BsGithub className="h-6 w-6" />
                                 <span>Github</span>
                             </button>
@@ -227,8 +235,8 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="relative py-4 text-center">
-                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300"></div>
-                            <span className="relative inline-block bg-slate-50 p-2">
+                            <div className="absolute top-1/2 h-[1px] w-full bg-gray-300 dark:bg-gray-700"></div>
+                            <span className="relative inline-block bg-slate-50 p-2 dark:bg-slate-800 dark:text-slate-50">
                                 Already have an account?{" "}
                                 <Link to={"/login"} className="text-cyan-500 hover:underline">
                                     Log in

@@ -8,8 +8,8 @@ import { AuthContext } from "../contexts/AuthProvider";
 const Header = () => {
     const [menuActive, setMenuActive] = useState(false);
     const [profileBtnActive, setProfileBtnActive] = useState(false);
-    const [darkLight, setDarkLight] = useState(false);
-    const { user, logOut, successToast, errorToast } = useContext(AuthContext);
+    const { user, logOut, successToast, errorToast, darkLight, setDarkLight } =
+        useContext(AuthContext);
 
     const handleLogOut = () => {
         setProfileBtnActive(!profileBtnActive);
@@ -22,7 +22,7 @@ const Header = () => {
             });
     };
     return (
-        <header className="header relative border-b bg-white py-5">
+        <header className="header relative border-b bg-white py-5 dark:border-b-gray-700 dark:bg-slate-900">
             <div className="container">
                 <div className="flex items-center justify-between gap-8">
                     {/* Logo */}
@@ -33,7 +33,7 @@ const Header = () => {
 
                     {/* Header Navigation */}
                     <nav
-                        className={`absolute top-full left-0 right-0 z-10 flex origin-top transform flex-col items-center gap-4 border-b bg-white pb-4 transition-all lg:static lg:flex-row lg:border-none lg:pb-0 ${
+                        className={`absolute top-full left-0 right-0 z-10 flex origin-top transform flex-col items-center gap-4 border-b bg-white pb-4 transition-all dark:bg-slate-900 dark:text-slate-200 lg:static lg:flex-row lg:border-none lg:pb-0 ${
                             menuActive
                                 ? "visible scale-y-100 opacity-100"
                                 : "invisible scale-y-0 opacity-0 lg:visible lg:scale-y-100 lg:opacity-100"
@@ -76,7 +76,7 @@ const Header = () => {
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => setDarkLight(!darkLight)}
-                            className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50">
+                            className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2 transition hover:bg-slate-300 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50 dark:bg-slate-600 dark:text-white dark:hover:bg-slate-700 dark:focus:bg-slate-700">
                             {darkLight ? (
                                 <BsMoon className="h-full w-full p-2" />
                             ) : (
@@ -88,7 +88,7 @@ const Header = () => {
                             <button
                                 title={user?.displayName || "Login"}
                                 onClick={() => setProfileBtnActive(!profileBtnActive)}
-                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2  transition hover:bg-slate-300 hover:outline hover:outline-cyan-500/20 focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50">
+                                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-cyan-500/10 bg-slate-200 text-center outline-2 outline-offset-2 transition hover:bg-slate-300  focus:bg-slate-300 focus:outline focus:outline-cyan-500/20 active:outline-cyan-500/50 dark:bg-slate-600 dark:text-white dark:hover:bg-slate-700 dark:focus:bg-slate-700">
                                 {user?.photoURL ? (
                                     <img
                                         src={user?.photoURL}
