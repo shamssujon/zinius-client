@@ -16,7 +16,7 @@ const FaqPage = () => {
                 <h2 className="mb-8 text-center text-4xl font-bold">Freequently Asked Questions</h2>
                 <Accordion allowToggle className="grid gap-4">
                     {faqs.map((faq) => (
-                        <AccordionItem className="overflow-hidden rounded border bg-white transition hover:shadow-md hover:shadow-slate-200">
+                        <AccordionItem key={faq.id} className="overflow-hidden rounded border bg-white transition hover:shadow-md hover:shadow-slate-200">
                             <AccordionButton className="flex items-center justify-between py-3 px-6 text-left text-xl font-semibold transition aria-expanded:bg-cyan-500 aria-expanded:text-white">
                                 <div>{faq.question}</div>
                                 <AccordionIcon className="!h-8 !w-8" />

@@ -4,6 +4,7 @@ import {
     createUserWithEmailAndPassword,
     getAuth,
     onAuthStateChanged,
+    sendEmailVerification,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
@@ -43,6 +44,10 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, profile);
     };
 
+    const emailVerification = () => {
+        return sendEmailVerification(auth.currentUser);
+    };
+
     // Log out
     const logOut = () => {
         setLoading(true);
@@ -62,6 +67,15 @@ const AuthProvider = ({ children }) => {
         };
     }, []);
 
+    // Success toast
+    const warningToast = (message) => {
+        toast.success(message, {
+            icon: "⚠",
+            duration: 5000,
+            position: "bottom-right",
+            className: "!bg-slate-800 !text-white !shadow !shadow-slate-500/20 !rounded-md",
+        });
+    };
     // Success toast
     const successToast = (message) => {
         toast.success(message, {
@@ -89,8 +103,10 @@ const AuthProvider = ({ children }) => {
         logOut,
         successToast,
         errorToast,
+        warningToast,
         updateUserProfile,
         loading,
+        emailVerification,
     };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

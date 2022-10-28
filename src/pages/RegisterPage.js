@@ -5,8 +5,15 @@ import { AuthContext } from "../contexts/AuthProvider";
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const RegisterPage = () => {
-    const { providerLogin, createUser, successToast, errorToast, updateUserProfile } =
-        useContext(AuthContext);
+    const {
+        providerLogin,
+        createUser,
+        successToast,
+        errorToast,
+        updateUserProfile,
+        emailVerification,
+        warningToast,
+    } = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -109,6 +116,13 @@ const RegisterPage = () => {
                 successToast("Account created sccessfully!");
                 navigate("/");
                 handleUpdateUserProfile(name, photoUrl);
+                emailVerification()
+                    .then(() => {
+                        warningToast(
+                            "A verification email has been sent to your email. Please Verify"
+                        );
+                    })
+                    .catch((e) => console.error(e));
             })
             .catch((error) => {
                 errorToast(error.message);
